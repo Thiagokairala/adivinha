@@ -19,7 +19,16 @@ app.run(function($ionicPlatform) {
 })
 
 app.config(function($stateProvider, $urlRouterProvider) {
-  $stateProvider.state('begin', {
+  // setup an abstract state for the tabs directive
+  $stateProvider
+
+  .state('game', {
+    url: "/game",
+    abstract: true,
+    templateUrl: "templates/game.html"
+  })
+
+  .state('game.begin', {
     url: '/begin',
     views: {
       'begin': {
@@ -27,7 +36,16 @@ app.config(function($stateProvider, $urlRouterProvider) {
         controller: 'BeginCtrl'
       }
     }
+  })
+  .state('game.match', {
+    url: '/match',
+    views: {
+      'match': {
+        templateUrl: 'templates/match.html',
+        controller: 'MatchCtrl'
+      }
+    }
   });
 
- $urlRouterProvider.otherwise('/begin')
+  $urlRouterProvider.otherwise('/game/begin');
 })

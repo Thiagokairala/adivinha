@@ -1,8 +1,12 @@
-<ion-view title="begin">
-    <ion-content padding="true">
-  		<ion-item ng-repeat="questionType in questionTypes" class="questionType"
-  			style="background-color: {{questionType.backGroundColor}}">
-  			{{questionType.typeName}}
-		</ion-item>
-	</ion-content>
-</ion-view>
+<ion-nav-view name="begin">
+	<ion-view title="begin">
+	    <ion-content padding="false">
+	  		<div ng-repeat="questionType in questionTypes" class="questionType"
+	  			style="background-color: {{questionType.backGroundColor}}">
+	  			<a href="#/game/match">
+	  				{{questionType.typeName}}
+	  			</a>
+			</div>
+		</ion-content>
+	</ion-view>
+</ion-nav-view>
