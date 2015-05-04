@@ -2,9 +2,10 @@
 	<ion-view title="begin">
 	    <ion-content padding="false">
 	  		<div ng-repeat="questionType in questionTypes" class="questionType"
-	  			style="background-color: {{questionType.backGroundColor}}">
-	  			<a href="#/game/match">
-	  				{{questionType.typeName}}
+	  			style="background-color: #{{questionType.backGroundColor}}">
+	  			<a href="#/game/match/{{questionType.typeName}}/{{questionType.backGroundColor}}" 
+	  			class="questionTypeLink">
+	  				<span>{{questionType.typeName}}</span>
 	  			</a>
 			</div>
 		</ion-content>

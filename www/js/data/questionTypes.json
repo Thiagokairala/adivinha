@@ -1,22 +1,18 @@
 [
 	{
 		"typeName": "Primeiro",
-		"id"	: 1,
-		"backGroundColor": "#616161"
+		"backGroundColor": "241564"
 	},
 	{
 		"typeName": "Segundo",
-		"id"	: 2,
-		"backGroundColor": "#616161"
+		"backGroundColor": "568465"
 	},
 	{
 		"typeName": "Terceiro",
-		"id"	: 3,
-		"backGroundColor": "#616161"
+		"backGroundColor": "547846"
 	},
 	{
 		"typeName": "Quarto",
-		"id"	: 4,
-		"backGroundColor": "#616161"
+		"backGroundColor": "416685"
 	}
 ]
