@@ -5,7 +5,7 @@ controller.controller('MatchCtrl', function($scope, $stateParams, $timeout, $sta
 	$scope.backGroundColor = $stateParams.backgroundColor;
 	
 	// preparing counter
-	$scope.counter = 50;
+	$scope.counter = 3;
 
 	// using the accelerometer
 	function onSuccess(acceleration) {
@@ -21,12 +21,16 @@ controller.controller('MatchCtrl', function($scope, $stateParams, $timeout, $sta
 	    alert('onError!');
 	};
 	
+	var myTymeOut;
+
 	$scope.countDown = function() {
+		myTymeOut = $timeout($scope.countDown, 1000);
 		$scope.counter--;
-		if($scope.counter == 0) {
+		if($scope.counter === 0) {
+			$timeout.cancel(myTymeOut);
+			SendArray.sendData("oi");
 			$state.go('game.result');
 		}
 		navigator.accelerometer.getCurrentAcceleration(onSuccess, onError);
-		$timeout($scope.countDown, 1000);
 	}
 });
