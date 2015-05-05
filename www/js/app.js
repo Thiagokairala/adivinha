@@ -5,9 +5,10 @@
 // the 2nd parameter is an array of 'requires'
 var app = angular.module('adivinha', [
   'ionic',
+  'ngCordova',
   'adivinha.controllers',
   'adivinha.services'
-  ])
+  ]);
 
 app.run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {

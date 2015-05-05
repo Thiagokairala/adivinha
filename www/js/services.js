@@ -7,4 +7,17 @@ var services = angular.module('adivinha.services', [])
 			return $http.get('js/data/questionTypes.json');
 		}
 	}
+})
+
+.factory('SendArray', function(){
+
+    var finalData;
+    return {
+        sendData: function(data) {
+            finalData = data;
+        },
+        getData: function() {
+            return finalData;
+        }
+    }
 });

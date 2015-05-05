@@ -1,18 +1,74 @@
 [
 	{
-		"typeName": "Primeiro",
-		"backGroundColor": "241564"
+		"typeName": "Ação",
+		"backGroundColor": "FFFACD",
+		"free": true,
+		"available": true
 	},
 	{
-		"typeName": "Segundo",
-		"backGroundColor": "568465"
+		"typeName": "Filmes",
+		"backGroundColor": "FFFF00",
+		"free": true,
+		"available": true
 	},
 	{
-		"typeName": "Terceiro",
-		"backGroundColor": "547846"
+		"typeName": "Personagens",
+		"backGroundColor": "CD853F",
+		"free": true,
+		"available": true
 	},
 	{
-		"typeName": "Quarto",
-		"backGroundColor": "416685"
+		"typeName": "animais",
+		"backGroundColor": "F4A460",
+		"free": true,
+		"available": true
+	},
+	{
+		"typeName": "Celebridades",
+		"backGroundColor": "A52A2A",
+		"free": false,
+		"available": true
+	},
+	{
+		"typeName": "Hits",
+		"backGroundColor": "FFA07A",
+		"free": false,
+		"available": true
+	},
+	{
+		"typeName": "futebol",
+		"backGroundColor": "FF7F50",
+		"free": false,
+		"available": false
+	},
+	{
+		"typeName": "Novelas",
+		"backGroundColor": "FF69B4",
+		"free": false,
+		"available": false
+	},
+	{
+		"typeName": "Séries",
+		"backGroundColor": "DB7093",
+		"free": false,
+		"available": false
+	},
+	{
+		"typeName": "Músicas Nacionais",
+		"backGroundColor": "D02090",
+		"free": false,
+		"available": false
+	},
+	{
+		"typeName": "Games",
+		"backGroundColor": "DDA0DD",
+		"free": false,
+		"available": false
+	},
+	{
+		"typeName": "Marcas",
+		"backGroundColor": "8A2BE2",
+		"free": false,
+		"available": false
 	}
 ]

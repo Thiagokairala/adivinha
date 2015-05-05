@@ -25,3 +25,29 @@ html, body {
 	height: 100%;
 	width: 100%;
 }
+
+.locker {
+	height: 50px;
+}
+
+.timer_counter {
+	height: 100px;
+	width: 100px;	
+}
+
+.back {
+	background-color: purple;
+	height: 100%;
+	width: 100%;
+}
+
+.startCountDown {
+	width: 100%;
+	height:50px;
+}
+
+.teste {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+}

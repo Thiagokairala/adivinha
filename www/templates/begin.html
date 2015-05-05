@@ -1,10 +1,18 @@
 <ion-nav-view name="begin">
+	<ion-header-bar align-title="left" class="bar-positive">
+	  <div class="header">
+	  	<h1>Adivinha</h1>	   
+	  </div>
+	</ion-header-bar>
 	<ion-view title="begin">
 	    <ion-content padding="false">
 	  		<div ng-repeat="questionType in questionTypes" class="questionType"
 	  			style="background-color: #{{questionType.backGroundColor}}">
-	  			<a href="#/game/match/{{questionType.typeName}}/{{questionType.backGroundColor}}" 
-	  			class="questionTypeLink">
+	  			<a ng-click="verifyIfIsAvailable(questionType)" class="questionTypeLink">
+	  				<img src="img/locked_locker.png" class="locker" 
+	  				ng-if="isPaidAndLocked(questionType) == true"/>
+	  				<img src="img/open_locker.png" class="locker"
+	  				ng-if="isPaindAndAvailable(questionType) == true" />
 	  				<span>{{questionType.typeName}}</span>
 	  			</a>
 			</div>
