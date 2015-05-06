@@ -2,9 +2,9 @@ controller.controller('BeginCtrl', function(
 	$scope, 
 	$state, 
 	$ionicPlatform, 
-	QuestionsTypes) {
+	json) {
 
-	QuestionsTypes.all().success(function(types){
+	json.all('questionTypes.json').success(function(types){
 		$scope.questionTypes = types;
 	});
 
@@ -32,7 +32,8 @@ controller.controller('BeginCtrl', function(
 				'game.match', 
 				{
 					typeName: questionType.typeName,
-					backgroundColor: questionType.backGroundColor
+					backgroundColor: questionType.backGroundColor,
+					fileWithQuestions: questionType.fileWithQuestions
 				}
 			);
 		} else {

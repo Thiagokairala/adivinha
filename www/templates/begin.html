@@ -10,9 +10,9 @@
 	  			style="background-color: #{{questionType.backGroundColor}}">
 	  			<a ng-click="verifyIfIsAvailable(questionType)" class="questionTypeLink">
 	  				<img src="img/locked_locker.png" class="locker" 
-	  				ng-if="isPaidAndLocked(questionType) == true"/>
+	  					ng-if="isPaidAndLocked(questionType) == true"/>
 	  				<img src="img/open_locker.png" class="locker"
-	  				ng-if="isPaindAndAvailable(questionType) == true" />
+	  					ng-if="isPaindAndAvailable(questionType) == true" />
 	  				<span>{{questionType.typeName}}</span>
 	  			</a>
 			</div>

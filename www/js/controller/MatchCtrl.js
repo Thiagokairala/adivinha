@@ -1,13 +1,21 @@
 controller.controller('MatchCtrl', function($scope, $stateParams, $ionicPlatform,
- $timeout, $state, $cordovaMedia, SendArray) {
+ $timeout, $state, $cordovaMedia, SendArray, json, Shuffler) {
 	screen.lockOrientation('landscape');
 
 	// preparing the board for the game
 	$scope.questionType = $stateParams.typeName;
 	$scope.backGroundColor = $stateParams.backgroundColor;
-	
+	var fileWithQuestions = $stateParams.fileWithQuestions;
+	var currentWordIndex = 0;
+	var answeredWords = [];
+
+	json.all(fileWithQuestions).success(function(words){
+		$scope.allWords = Shuffler.shuffle(words);
+		$scope.nextWord = $scope.allWords[0];
+	});
+
 	// preparing counter
-	$scope.counter = 30;
+	$scope.counter = 10;
 	
 	var myTymeOut;
 
@@ -39,7 +47,7 @@ controller.controller('MatchCtrl', function($scope, $stateParams, $ionicPlatform
 		$scope.counter--;
 		if($scope.counter === 0) {
 			$timeout.cancel(myTymeOut);
-			SendArray.sendData("oi");
+			SendArray.sendData(answeredWords);
 			releaseMidias();
 			$state.go('game.result');
 		}
@@ -51,10 +59,23 @@ controller.controller('MatchCtrl', function($scope, $stateParams, $ionicPlatform
 		var z = acceleration.z;
 		if(z < -5.0) {
 			$scope.correctAudio.play();
+			insertWordToResult($scope.allWords[currentWordIndex], true);
 		} else if(z > 5.0) {
 			$scope.wrongAudio.play();
+			insertWordToResult($scope.allWords[currentWordIndex], false);
 		}
 	};
+
+	function insertWordToResult(word, answer) {
+		answeredWord = 
+			{
+				word:word.word,
+				answer:answer
+			};
+		answeredWords.push(answeredWord);
+		currentWordIndex++;
+		$scope.nextWord = $scope.allWords[currentWordIndex];
+	}
 
 	function onError() {
 	    alert('onError!');

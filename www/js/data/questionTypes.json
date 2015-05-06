@@ -3,72 +3,84 @@
 		"typeName": "Ação",
 		"backGroundColor": "FFFACD",
 		"free": true,
-		"available": true
+		"available": true,
+		"fileWithQuestions": "acao.json"
 	},
 	{
 		"typeName": "Filmes",
 		"backGroundColor": "FFFF00",
 		"free": true,
-		"available": true
+		"available": true,
+		"fileWithQuestions": "filmes.json"
 	},
 	{
 		"typeName": "Personagens",
 		"backGroundColor": "CD853F",
 		"free": true,
-		"available": true
+		"available": true,
+		"fileWithQuestions": "pesronagens.json"
 	},
 	{
-		"typeName": "animais",
+		"typeName": "Animais",
 		"backGroundColor": "F4A460",
 		"free": true,
-		"available": true
+		"available": true,
+		"fileWithQuestions": "animais.json"
 	},
 	{
 		"typeName": "Celebridades",
 		"backGroundColor": "A52A2A",
 		"free": false,
-		"available": true
+		"available": true,
+		"fileWithQuestions": "celebridades.json"
 	},
 	{
 		"typeName": "Hits",
 		"backGroundColor": "FFA07A",
 		"free": false,
-		"available": true
+		"available": true,
+		"fileWithQuestions": "hits.json"
 	},
 	{
 		"typeName": "futebol",
 		"backGroundColor": "FF7F50",
 		"free": false,
-		"available": false
+		"available": false,
+		"fileWithQuestions": "futebol.json"
 	},
 	{
 		"typeName": "Novelas",
 		"backGroundColor": "FF69B4",
 		"free": false,
-		"available": false
+		"available": false,
+		"fileWithQuestions": "novelas.json"
 	},
 	{
 		"typeName": "Séries",
 		"backGroundColor": "DB7093",
 		"free": false,
-		"available": false
+		"available": false,
+		"fileWithQuestions": "series.json"
 	},
 	{
 		"typeName": "Músicas Nacionais",
 		"backGroundColor": "D02090",
 		"free": false,
-		"available": false
+		"available": false,
+		"fileWithQuestions": "musicasNacionais.json"
 	},
 	{
 		"typeName": "Games",
 		"backGroundColor": "DDA0DD",
 		"free": false,
-		"available": false
+		"available": false,
+		"fileWithQuestions": "games.json"
 	},
 	{
 		"typeName": "Marcas",
 		"backGroundColor": "8A2BE2",
 		"free": false,
-		"available": false
+		"available": false,
+		"fileWithQuestions": "marcas.json"
 	}
 ]

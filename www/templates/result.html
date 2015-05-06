@@ -1,7 +1,9 @@
 <ion-nav-view name="result">
 	<ion-view title="result">
 	    <ion-content padding="false">
-	  		<h1>{{array}}</h1>
+	    	<div ng-repeat="item in array">
+	  			<h1>{{item}}</h1>
+	  		</div>
 		</ion-content>
 	</ion-view>
 </ion-nav-view>
