@@ -1,6 +1,9 @@
 <ion-nav-view name="result">
 	<ion-view title="result">
 	    <ion-content padding="false">
+	    	<div class="back_div">
+	    		<button ng-click="back()" class="back_btn">Voltar</button>
+	    	</div>
 	    	<div ng-repeat="item in array">
 	  			<h1>{{item}}</h1>
 	  		</div>

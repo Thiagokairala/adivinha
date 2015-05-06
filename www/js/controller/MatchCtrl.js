@@ -9,16 +9,15 @@ controller.controller('MatchCtrl', function($scope, $stateParams, $ionicPlatform
 	var currentWordIndex = 0;
 	var answeredWords = [];
 
+	$scope.nextWord = "começar jogo!";
+	var isOn = false;
+	var isPlaying = false;
+
 	json.all(fileWithQuestions).success(function(words){
 		$scope.allWords = Shuffler.shuffle(words);
-		$scope.nextWord = $scope.allWords[0];
+		
 	});
-
-	// preparing counter
-	$scope.counter = 10;
 	
-	var myTymeOut;
-
 	// loading audio files.
 	document.addEventListener("deviceready", onDeviceReady, false);
 		function onDeviceReady() {
@@ -40,7 +39,18 @@ controller.controller('MatchCtrl', function($scope, $stateParams, $ionicPlatform
     function releaseMidias() {
     	$scope.correctAudio.release();
     	$scope.wrongAudio.release();
-    }           
+    }
+
+    var myTymeOut;
+
+    $scope.counter = 20;
+    $scope.beginGame = function() {
+    	isOn = true;
+    	isPlaying = true;
+    	$scope.nextWord = $scope.allWords[0];
+    	myTymeOut = $timeout($scope.countDown, 1000);
+
+    }        
 
 	$scope.countDown = function() {
 		myTymeOut = $timeout($scope.countDown, 1000);
@@ -80,4 +90,9 @@ controller.controller('MatchCtrl', function($scope, $stateParams, $ionicPlatform
 	function onError() {
 	    alert('onError!');
 	};
+
+	$scope.showCounter = function() {
+		var showCounter = isOn && isPlaying;
+		return showCounter
+	}
 });
