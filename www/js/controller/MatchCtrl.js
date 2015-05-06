@@ -9,7 +9,7 @@ controller.controller('MatchCtrl', function($scope, $stateParams, $ionicPlatform
 	var currentWordIndex = 0;
 	var answeredWords = [];
 
-	$scope.nextWord = "começar jogo!";
+	$scope.nextWord = null;
 	var isOn = false;
 	var isPlaying = false;
 
@@ -68,11 +68,11 @@ controller.controller('MatchCtrl', function($scope, $stateParams, $ionicPlatform
 	function onSuccess(acceleration) {
 		var z = acceleration.z;
 		if(z < -5.0) {
-			$scope.correctAudio.play();
-			insertWordToResult($scope.allWords[currentWordIndex], true);
-		} else if(z > 5.0) {
 			$scope.wrongAudio.play();
 			insertWordToResult($scope.allWords[currentWordIndex], false);
+		} else if(z > 5.0) {
+			$scope.correctAudio.play();
+			insertWordToResult($scope.allWords[currentWordIndex], true);
 		}
 	};
 

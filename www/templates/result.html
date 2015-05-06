@@ -5,7 +5,8 @@
 	    		<button ng-click="back()" class="back_btn">Voltar</button>
 	    	</div>
 	    	<div ng-repeat="item in array">
-	  			<h1>{{item}}</h1>
+	  			<h1 ng-if="item.answer == true">{{item.word}}</h1>
+	  			<h1 ng-if="item.answer == false" style="color: red;">{{item.word}}</h1>
 	  		</div>
 		</ion-content>
 	</ion-view>
