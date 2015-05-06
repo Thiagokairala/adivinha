@@ -1,5 +1,5 @@
-controller.controller('MatchCtrl', function($scope, $stateParams, $ionicPlatform,
- $timeout, $state, $cordovaMedia, SendArray, json, Shuffler) {
+controller.controller('MatchCtrl', function($scope, $stateParams,
+ $timeout, $state, $cordovaMedia, $ionicLoading, SendArray, json, Shuffler) {
 	screen.lockOrientation('landscape');
 
 	// preparing the board for the game
@@ -64,17 +64,30 @@ controller.controller('MatchCtrl', function($scope, $stateParams, $ionicPlatform
 		navigator.accelerometer.getCurrentAcceleration(onSuccess, onError);
 	}
 
+	var correctAnswer;
 	// using the accelerometer
 	function onSuccess(acceleration) {
 		var z = acceleration.z;
 		if(z < -5.0) {
 			$scope.wrongAudio.play();
+			showAndHideStatus('templates/wrong.html');
 			insertWordToResult($scope.allWords[currentWordIndex], false);
 		} else if(z > 5.0) {
 			$scope.correctAudio.play();
+			showAndHideStatus('templates/correct.html');
 			insertWordToResult($scope.allWords[currentWordIndex], true);
+			
 		}
 	};
+
+	function showAndHideStatus(path) {
+		$ionicLoading.show({templateUrl: path});
+		var timeOut = $timeout(function() {
+				$ionicLoading.hide();
+			}, 1000);
+
+		$timeOut.cancel(timeOut);
+	}
 
 	function insertWordToResult(word, answer) {
 		answeredWord = 
