@@ -1,11 +1,9 @@
 <ion-nav-view name="match">
 	<ion-view title="match">
-	    <ion-content padding="false" class="gameBoard" style="background-color: #{{backGroundColor}}">
-	  		<a ng-click="beginGame()" style="backgroundColor: black;">
-  				<h3 ng-if="showCounter() == false">Começar jogo</h3>
-  				<h3 ng-if="showCounter() == true">{{nextWord.word}}</h3>
-  				<h3 ng-if="showCounter() == true">{{counter}}</h3>
-	  		</a>
-		</ion-content>
+	    <ion-pane padding="false" class="game_board">
+	    	<div class="game_board_div">
+	    		<img src="img/matchImg/matchBackground.png" class="background_match" />
+			</div>
+		</ion-pane>
 	</ion-view>
 </ion-nav-view>

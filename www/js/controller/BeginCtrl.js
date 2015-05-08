@@ -32,7 +32,6 @@ controller.controller('BeginCtrl', function(
 				'game.match', 
 				{
 					typeName: questionType.typeName,
-					backgroundColor: questionType.backGroundColor,
 					fileWithQuestions: questionType.fileWithQuestions
 				}
 			);

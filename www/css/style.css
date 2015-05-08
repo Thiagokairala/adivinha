@@ -68,8 +68,9 @@ html, body {
 	height: 100%;
 }
 
-.gameBoard {
-	padding: 20% 30%;
+.game_board {
+	width: 100%;
+	height: 100%;
 }
 
 .header_img {
@@ -86,4 +87,16 @@ html, body {
 	position: absolute;
 	width: 100%;
 	height: 100%;
+}
+
+.background_match {
+	position: absolute;
+	z-index: 0;
+	height: 100%;
+	width: 100%;
+}
+
+.game_board_div {
+	height: 100%;
+	width: 100%;
 }

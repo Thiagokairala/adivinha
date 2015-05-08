@@ -1,10 +1,9 @@
 controller.controller('MatchCtrl', function($scope, $stateParams,
  $timeout, $state, $cordovaMedia, $ionicLoading, SendArray, json, Shuffler) {
-	screen.lockOrientation('landscape');
+	//screen.lockOrientation('landscape');
 
 	// preparing the board for the game
 	$scope.questionType = $stateParams.typeName;
-	$scope.backGroundColor = $stateParams.backgroundColor;
 	var fileWithQuestions = $stateParams.fileWithQuestions;
 	var currentWordIndex = 0;
 	var answeredWords = [];
