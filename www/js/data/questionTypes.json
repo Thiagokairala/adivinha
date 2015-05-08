@@ -4,83 +4,95 @@
 		"backGroundColor": "FFFACD",
 		"free": true,
 		"available": true,
-		"fileWithQuestions": "acao.json"
+		"fileWithQuestions": "acao.json",
+		"imageUrl":"img/homeImg/action.png"
 	},
 	{
 		"typeName": "Filmes",
 		"backGroundColor": "FFFF00",
 		"free": true,
 		"available": true,
-		"fileWithQuestions": "filmes.json"
+		"fileWithQuestions": "filmes.json",
+		"imageUrl":"img/homeImg/action.png"
 	},
 	{
 		"typeName": "Personagens",
 		"backGroundColor": "CD853F",
 		"free": true,
 		"available": true,
-		"fileWithQuestions": "pesronagens.json"
+		"fileWithQuestions": "pesronagens.json",
+		"imageUrl":"img/homeImg/action.png"
 	},
 	{
 		"typeName": "Animais",
 		"backGroundColor": "F4A460",
 		"free": true,
 		"available": true,
-		"fileWithQuestions": "animais.json"
+		"fileWithQuestions": "animais.json",
+		"imageUrl":"img/homeImg/action.png"
 	},
 	{
 		"typeName": "Celebridades",
 		"backGroundColor": "A52A2A",
 		"free": false,
 		"available": true,
-		"fileWithQuestions": "celebridades.json"
+		"fileWithQuestions": "celebridades.json",
+		"imageUrl":"img/homeImg/action.png"
 	},
 	{
 		"typeName": "Hits",
 		"backGroundColor": "FFA07A",
 		"free": false,
 		"available": true,
-		"fileWithQuestions": "hits.json"
+		"fileWithQuestions": "hits.json",
+		"imageUrl":"img/homeImg/action.png"
 	},
 	{
 		"typeName": "futebol",
 		"backGroundColor": "FF7F50",
 		"free": false,
 		"available": false,
-		"fileWithQuestions": "futebol.json"
+		"fileWithQuestions": "futebol.json",
+		"imageUrl":"img/homeImg/action.png"
 	},
 	{
 		"typeName": "Novelas",
 		"backGroundColor": "FF69B4",
 		"free": false,
 		"available": false,
-		"fileWithQuestions": "novelas.json"
+		"fileWithQuestions": "novelas.json",
+		"imageUrl":"img/homeImg/action.png"
 	},
 	{
 		"typeName": "Séries",
 		"backGroundColor": "DB7093",
 		"free": false,
 		"available": false,
-		"fileWithQuestions": "series.json"
+		"fileWithQuestions": "series.json",
+		"imageUrl":"img/homeImg/action.png"
 	},
 	{
 		"typeName": "Músicas Nacionais",
 		"backGroundColor": "D02090",
 		"free": false,
 		"available": false,
-		"fileWithQuestions": "musicasNacionais.json"
+		"fileWithQuestions": "musicasNacionais.json",
+		"imageUrl":"img/homeImg/action.png"
 	},
 	{
 		"typeName": "Games",
 		"backGroundColor": "DDA0DD",
 		"free": false,
 		"available": false,
-		"fileWithQuestions": "games.json"
+		"fileWithQuestions": "games.json",
+		"imageUrl":"img/homeImg/action.png"
 	},
 	{
 		"typeName": "Marcas",
 		"backGroundColor": "8A2BE2",
 		"free": false,
 		"available": false,
-		"fileWithQuestions": "marcas.json"
+		"fileWithQuestions": "marcas.json",
+		"imageUrl":"img/homeImg/action.png"
 	}
 ]
