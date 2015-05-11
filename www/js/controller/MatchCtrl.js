@@ -1,5 +1,5 @@
 controller.controller('MatchCtrl', function($scope, $stateParams,
- $timeout, $state, $cordovaMedia, $ionicLoading, ClockCtrl, SendArray, json, Shuffler) {
+ $timeout, $state, $cordovaMedia, $ionicLoading, SendArray, json, Shuffler) {
 	screen.lockOrientation('landscape');
 	// loading audio files and starting games.
 	document.addEventListener("deviceready", onDeviceReady, false);
