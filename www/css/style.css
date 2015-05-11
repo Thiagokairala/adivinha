@@ -100,3 +100,14 @@ html, body {
 	height: 100%;
 	width: 100%;
 }
+
+.text_match {
+	position: absolute;
+	z-index: 1;
+}
+
+.match_text_place {
+	height: 100%;
+	width: 100%;
+	padding: 20%;	
+}

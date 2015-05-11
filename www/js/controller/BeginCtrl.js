@@ -31,7 +31,6 @@ controller.controller('BeginCtrl', function(
 			$state.go(
 				'game.match', 
 				{
-					typeName: questionType.typeName,
 					fileWithQuestions: questionType.fileWithQuestions
 				}
 			);

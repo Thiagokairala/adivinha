@@ -43,7 +43,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     }
   })
   .state('game.match', {
-    url: '/match/:typeName/:fileWithQuestions',
+    url: '/match/:fileWithQuestions',
     views: {
       'match': {
         templateUrl: 'templates/match.html',

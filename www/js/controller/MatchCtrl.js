@@ -1,35 +1,75 @@
 controller.controller('MatchCtrl', function($scope, $stateParams,
  $timeout, $state, $cordovaMedia, $ionicLoading, SendArray, json, Shuffler) {
-	//screen.lockOrientation('landscape');
+	screen.lockOrientation('landscape');
+	// loading audio files and starting games.
+	document.addEventListener("deviceready", onDeviceReady, false);
 
 	// preparing the board for the game
-	$scope.questionType = $stateParams.typeName;
 	var fileWithQuestions = $stateParams.fileWithQuestions;
-	var currentWordIndex = 0;
+	$scope.currentWordIndex = 0;
 	var answeredWords = [];
 
 	$scope.nextWord = null;
-	var isOn = false;
+	var isOn = true;
 	var isPlaying = false;
+	var myTymeOut;
 
 	json.all(fileWithQuestions).success(function(words){
 		$scope.allWords = Shuffler.shuffle(words);
-		
+		console.log($scope.allWords);
 	});
 	
-	// loading audio files.
-	document.addEventListener("deviceready", onDeviceReady, false);
-		function onDeviceReady() {
-			var beginOfPath = getBeginOfPath();
-	   		$scope.correctAudio = new Media(beginOfPath + "audio/correct.mp3");
-			$scope.wrongAudio = new Media(beginOfPath + "audio/wrong.mp3");
-		
-		// fix for the android way to put audios.
-		function getBeginOfPath() {
-			if(device.platform.toLowerCase() == "android") {
-				return "/android_asset/www/";
-			} else {
-				return "";
+
+	const errorSpace = 1.5;
+
+	const xToBegin = 9.8;
+	const yToBegin = 0;
+	const zToBegin = 0;
+
+	var accelerometerToBegin = null;
+
+
+	function onDeviceReady() {
+		var frequency = { frequency: 500 };  // Update every half second
+
+		var beginOfPath = getBeginOfPath();
+   		$scope.correctAudio = new Media(beginOfPath + "audio/correct.mp3");
+		$scope.wrongAudio = new Media(beginOfPath + "audio/wrong.mp3");
+
+		accelerometer = navigator.accelerometer.watchAcceleration(isToBegin, onError, frequency);			
+	}
+	// fix for the android way to put audios.
+	function getBeginOfPath() {
+		if(device.platform.toLowerCase() == "android") {
+			return "/android_asset/www/";
+		} else {
+			return "";
+		}
+	}
+
+	function beginGame() {
+    	isPlaying = true;
+    	isOn = false;
+    	$scope.nextWord = $scope.allWords[0];
+    	myTymeOut = $timeout(countDown, 1000);
+	}
+
+	function isToBegin(acceleration) {
+		var x = acceleration.x;
+		var y = acceleration.y;
+		var z = acceleration.z;
+
+		if(y > yToBegin - errorSpace && y < yToBegin + errorSpace) {
+			if(z > zToBegin - errorSpace && z < zToBegin + errorSpace) {
+				if(x < 0) {
+					x = -x;
+				} else {
+					x = x;
+				}
+				if(x  > xToBegin - errorSpace && x < xToBegin + errorSpace) {
+					navigator.accelerometer.clearWatch(accelerometer);
+					beginGame();
+				}
 			}
 		}
 	}
@@ -40,19 +80,10 @@ controller.controller('MatchCtrl', function($scope, $stateParams,
     	$scope.wrongAudio.release();
     }
 
-    var myTymeOut;
-
     $scope.counter = 20;
-    $scope.beginGame = function() {
-    	isOn = true;
-    	isPlaying = true;
-    	$scope.nextWord = $scope.allWords[0];
-    	myTymeOut = $timeout($scope.countDown, 1000);
-
-    }        
-
-	$scope.countDown = function() {
-		myTymeOut = $timeout($scope.countDown, 1000);
+     
+	function countDown() {
+		myTymeOut = $timeout(countDown, 1000);
 		$scope.counter--;
 		if($scope.counter === 0) {
 			$timeout.cancel(myTymeOut);
@@ -62,30 +93,30 @@ controller.controller('MatchCtrl', function($scope, $stateParams,
 		}
 		navigator.accelerometer.getCurrentAcceleration(onSuccess, onError);
 	}
-
-	var correctAnswer;
 	// using the accelerometer
 	function onSuccess(acceleration) {
 		var z = acceleration.z;
 		if(z < -5.0) {
 			$scope.wrongAudio.play();
 			showAndHideStatus('templates/wrong.html');
-			insertWordToResult($scope.allWords[currentWordIndex], false);
+			insertWordToResult($scope.allWords[$scope.currentWordIndex], false);
 		} else if(z > 5.0) {
 			$scope.correctAudio.play();
 			showAndHideStatus('templates/correct.html');
-			insertWordToResult($scope.allWords[currentWordIndex], true);
+			insertWordToResult($scope.allWords[$scope.currentWordIndex], true);
 			
 		}
-	};
+	}
 
+	var timeOutStatus = null;
 	function showAndHideStatus(path) {
 		$ionicLoading.show({templateUrl: path});
-		var timeOut = $timeout(function() {
-				$ionicLoading.hide();
-			}, 1000);
+		timeOutStatus = $timeout(hideStatus, 1000);
+	}
 
-		$timeOut.cancel(timeOut);
+	function hideStatus() {
+		$ionicLoading.hide();
+		$timeout.cancel(timeOutStatus);
 	}
 
 	function insertWordToResult(word, answer) {
@@ -95,16 +126,19 @@ controller.controller('MatchCtrl', function($scope, $stateParams,
 				answer:answer
 			};
 		answeredWords.push(answeredWord);
-		currentWordIndex++;
-		$scope.nextWord = $scope.allWords[currentWordIndex];
+		$scope.currentWordIndex = $scope.currentWordIndex + 1;
+		$scope.nextWord = $scope.allWords[$scope.currentWordIndex];
 	}
 
 	function onError() {
 	    alert('onError!');
-	};
+	}
 
-	$scope.showCounter = function() {
-		var showCounter = isOn && isPlaying;
-		return showCounter
+	$scope.gameIsBeingPrepare = function() {
+		return isOn;
+	}
+
+	$scope.gameRolling = function() {
+		return isPlaying;
 	}
 });
