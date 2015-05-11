@@ -1,15 +1,13 @@
-<ion-nav-view name="result">
-	<ion-view title="result">
-	    <ion-pane>
-	    	<div class="back_div">
-	    		<a ng-click="back()">
-	    			<img src="img/result/voltar.png" />
-	    		</a>
-	    	</div>
-	    	<div ng-repeat="item in array">
-	  			<h1 ng-if="item.answer == true">{{item.word}}</h1>
-	  			<h1 ng-if="item.answer == false" style="color: red;">{{item.word}}</h1>
-	  		</div>
-		</ion-pane>
-	</ion-view>
-</ion-nav-view>
+<ion-view title="result">
+    <ion-pane>
+    	<div class="back_div">
+    		<a ng-click="back()">
+    			<img src="img/result/voltar.png" />
+    		</a>
+    	</div>
+    	<div ng-repeat="item in array">
+  			<h1 ng-if="item.answer == true">{{item.word}}</h1>
+  			<h1 ng-if="item.answer == false" style="color: red;">{{item.word}}</h1>
+  		</div>
+	</ion-pane>
+</ion-view>

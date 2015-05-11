@@ -79,7 +79,7 @@ controller.controller('MatchCtrl', function($scope, $stateParams,
     	$scope.wrongAudio.release();
     }
 
-    $scope.counter = 30;
+    $scope.counter = 3;
      
 	function countDown() {
 		myTymeOut = $timeout(countDown, 1000);
