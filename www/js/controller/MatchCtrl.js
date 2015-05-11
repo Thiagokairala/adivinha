@@ -1,5 +1,5 @@
 controller.controller('MatchCtrl', function($scope, $stateParams,
- $timeout, $state, $cordovaMedia, $ionicLoading, SendArray, json, Shuffler) {
+ $timeout, $state, $cordovaMedia, $ionicLoading, ClockCtrl, SendArray, json, Shuffler) {
 	screen.lockOrientation('landscape');
 	// loading audio files and starting games.
 	document.addEventListener("deviceready", onDeviceReady, false);
@@ -16,7 +16,6 @@ controller.controller('MatchCtrl', function($scope, $stateParams,
 
 	json.all(fileWithQuestions).success(function(words){
 		$scope.allWords = Shuffler.shuffle(words);
-		console.log($scope.allWords);
 	});
 	
 
@@ -80,7 +79,7 @@ controller.controller('MatchCtrl', function($scope, $stateParams,
     	$scope.wrongAudio.release();
     }
 
-    $scope.counter = 20;
+    $scope.counter = 30;
      
 	function countDown() {
 		myTymeOut = $timeout(countDown, 1000);

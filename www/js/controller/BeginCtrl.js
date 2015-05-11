@@ -29,7 +29,7 @@ controller.controller('BeginCtrl', function(
 		var paidAndAvailable = free == false && questionType.available == true;
 		if(free || paidAndAvailable) {
 			$state.go(
-				'game.match', 
+				'^.match', 
 				{
 					fileWithQuestions: questionType.fileWithQuestions
 				}
@@ -38,6 +38,5 @@ controller.controller('BeginCtrl', function(
 			// Here is gonna be the inappbilling code
 			alert("nao comprou");
 		}
-		href="#/game/match/{{questionType.typeName}}/{{questionType.backGroundColor}}" 
 	}
 });
