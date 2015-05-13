@@ -1,14 +1,13 @@
 <ion-view title="match">
     <ion-pane padding="false" class="game_board">
     	<div class="game_board_div">
-    		<img src="img/matchImg/matchBackground.png" class="background_match" />
     		<div class="match_text_place">
     			<div ng-if="gameIsBeingPrepare() == true" class="before_game">
-    				<h3 class="text_match match_title">O jogo vai começar, posicione o smartphone em sua testa</h3>
-    				<h3 class="text_match match_sub_title">Cronometro inicio</h3>
+    				<h1 class="text_match match_title">O jogo vai começar, posicione o smartphone em sua testa</h1>
+    				<h3 class="text_match match_sub_title">{{counterBegin}}</h3>
     			</div>
     			<div ng-if="gameRolling() === true" class="during_game">
-	    			<h3 class="text_match match_title">{{nextWord.word}}</h3>
+	    			<h1 class="text_match match_title">{{nextWord.word}}</h1>
 		    		<h3 class="text_match match_sub_title">{{counter}}</h3>
 	    		</div>
     		</div>

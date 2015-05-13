@@ -19,7 +19,7 @@ controller.controller('MatchCtrl', function($scope, $stateParams,
 	});
 	
 
-	const errorSpace = 1.5;
+	const errorSpace = 2.0;
 
 	const xToBegin = 9.8;
 	const yToBegin = 0;
@@ -46,11 +46,19 @@ controller.controller('MatchCtrl', function($scope, $stateParams,
 		}
 	}
 
+	$scope.counterBegin = 3;
+	var timerBegin = null;
 	function beginGame() {
-    	isPlaying = true;
-    	isOn = false;
-    	$scope.nextWord = $scope.allWords[0];
-    	myTymeOut = $timeout(countDown, 1000);
+		timerBegin = $timeout(beginGame, 1000);
+		$scope.counterBegin--;
+		if($scope.counterBegin == 0) {
+	    	isPlaying = true;
+	    	isOn = false;
+	    	$scope.nextWord = $scope.allWords[0];
+	    	$timeout.cancel(timerBegin)
+	    	myTymeOut = $timeout(countDown, 1000);
+    	}
+
 	}
 
 	function isToBegin(acceleration) {
@@ -79,7 +87,7 @@ controller.controller('MatchCtrl', function($scope, $stateParams,
     	$scope.wrongAudio.release();
     }
 
-    $scope.counter = 3;
+    $scope.counter = 20;
      
 	function countDown() {
 		myTymeOut = $timeout(countDown, 1000);

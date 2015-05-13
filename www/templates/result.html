@@ -1,13 +1,21 @@
 <ion-view title="result">
     <ion-pane>
-    	<div class="back_div">
-    		<a ng-click="back()">
-    			<img src="img/result/voltar.png" />
-    		</a>
-    	</div>
-    	<div ng-repeat="item in array">
-  			<h1 ng-if="item.answer == true">{{item.word}}</h1>
-  			<h1 ng-if="item.answer == false" style="color: red;">{{item.word}}</h1>
+    <img src="img/result/resultBackground.png" class="background_result" />
+    	<div class="result_page">
+	    	<ion-scroll zooming="false" direction="y" class="answers">
+	    		<div ng-repeat="item in array">
+	    			<h1 ng-show="item.answer == true" style="color: #00FF00;">{{item.word}}</h1>
+	  				<h1 ng-show="item.answer == false" style="color: red;">{{item.word}}</h1>
+	  				<div class="gray_line_content">
+	  					<div class="gray_line"></div>
+	  				</div>
+	  			</div>
+	    	</ion-scroll>
+	    	<div class="back_div">
+	    		<a ng-click="back()" class="back_link">
+	    			<img src="img/result/voltar.png" />
+	    		</a>
+	    	</div>
   		</div>
 	</ion-pane>
 </ion-view>
