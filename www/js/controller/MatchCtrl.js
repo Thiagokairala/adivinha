@@ -89,9 +89,14 @@ controller.controller('MatchCtrl', function($scope, $stateParams,
 
     $scope.counter = 20;
      
+    var clock = 0;
 	function countDown() {
-		myTymeOut = $timeout(countDown, 1000);
-		$scope.counter--;
+		myTymeOut = $timeout(countDown, 500);
+		clock++;
+		if(clock === 2) {
+			$scope.counter--;
+			clock = 0;
+		}
 		if($scope.counter === 0) {
 			$timeout.cancel(myTymeOut);
 			SendArray.sendData(answeredWords);
@@ -101,17 +106,23 @@ controller.controller('MatchCtrl', function($scope, $stateParams,
 		navigator.accelerometer.getCurrentAcceleration(onSuccess, onError);
 	}
 	// using the accelerometer
+	var wasSetBack = true;
 	function onSuccess(acceleration) {
 		var z = acceleration.z;
-		if(z < -5.0) {
-			$scope.wrongAudio.play();
-			showAndHideStatus('templates/wrong.html');
-			insertWordToResult($scope.allWords[$scope.currentWordIndex], false);
-		} else if(z > 5.0) {
-			$scope.correctAudio.play();
-			showAndHideStatus('templates/correct.html');
-			insertWordToResult($scope.allWords[$scope.currentWordIndex], true);
-			
+		if(wasSetBack === true) {
+			if(z < -5.0) {
+				$scope.wrongAudio.play();
+				showAndHideStatus('templates/wrong.html');
+				insertWordToResult($scope.allWords[$scope.currentWordIndex], false);
+				wasSetBack = false;
+			} else if(z > 5.0) {
+				$scope.correctAudio.play();
+				showAndHideStatus('templates/correct.html');
+				insertWordToResult($scope.allWords[$scope.currentWordIndex], true);
+				wasSetBack = false;
+			}
+		} else if(z > -2.0 && z < 2.0) {
+			wasSetBack = true;
 		}
 	}
 
