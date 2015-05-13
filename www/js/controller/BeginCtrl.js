@@ -1,7 +1,8 @@
 controller.controller('BeginCtrl', function(
 	$scope, 
 	$state, 
-	$ionicPlatform, 
+	$ionicPlatform,
+	$ionicPopup,
 	json,
 	db) {
 
@@ -44,9 +45,17 @@ controller.controller('BeginCtrl', function(
 				}
 			);
 		} else {
-			// Here is gonna be the inappbilling code
-			alert("nao comprou");
-			db.purchase(questionType.id, $state);
+			var confirmPopup = $ionicPopup.confirm({
+    			title: 'Categoria paga',
+    			template: 'Deseja ir para a loja?'
+   			});
+			confirmPopup.then(function(res) {
+				if(res) {
+					db.purchase(questionType.id, $state);
+				} else {
+					// nothing to do.
+				}
+			})	
 		}
 	}
 });

@@ -32,13 +32,11 @@ var services = angular.module('adivinha.services', [])
         },
         purchase: function(id, $state) {
             query = "UPDATE 'questionType' SET available = '1' WHERE id = ?";
-            alert(id);
 
             db.transaction(
                 function(tx) {
                     tx.executeSql(query, [id], 
                         function(tx, r) {
-                            alert("Your SQLite query was successful!");
                             $state.go($state.current, {}, {reload: true});
                         }, 
                         function(tx, e) {
