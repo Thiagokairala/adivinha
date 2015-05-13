@@ -10,6 +10,8 @@ var app = angular.module('adivinha', [
   'adivinha.services'
   ]);
 
+var db;
+
 app.run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -20,6 +22,10 @@ app.run(function($ionicPlatform) {
     if(window.StatusBar) {
       StatusBar.styleDefault();
     }
+    db = window.sqlitePlugin.openDatabase(
+      {name: "adivinha.db",
+      createFromLocation: 1,
+      createFromResource: 1});
   });
 })
 

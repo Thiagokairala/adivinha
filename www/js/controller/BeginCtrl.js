@@ -6,7 +6,19 @@ controller.controller('BeginCtrl', function(
 	db) {
 
 	$ionicPlatform.ready(function() {
-		$scope.questionTypes = db.get($scope.questionTypes);
+		db.get().then(gotValue, didntWork);
+
+		function gotValue(res) {
+			var arrayOfTypes = [];
+			for(var i = 0; i<res.rows.length; i++) {
+				arrayOfTypes.push(res.rows.item(i));
+			}
+			$scope.questionTypes = arrayOfTypes;
+		}
+
+		function didntWork(e) {
+			alert("nao foi");
+		}
 	});
 
 	// json.all('questionTypes.json').success(function(types){
