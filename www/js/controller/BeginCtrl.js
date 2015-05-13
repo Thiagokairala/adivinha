@@ -8,22 +8,14 @@ controller.controller('BeginCtrl', function(
 	$ionicPlatform.ready(function() {
 		db.get().then(gotValue, didntWork);
 
-		function gotValue(res) {
-			var arrayOfTypes = [];
-			for(var i = 0; i<res.rows.length; i++) {
-				arrayOfTypes.push(res.rows.item(i));
-			}
+		function gotValue(arrayOfTypes) {
 			$scope.questionTypes = arrayOfTypes;
 		}
 
 		function didntWork(e) {
-			alert("nao foi");
+			alert("Sorry an error have ocurred");
 		}
 	});
-
-	// json.all('questionTypes.json').success(function(types){
-	// 	$scope.questionTypes = types;
-	// });
 
 	$scope.isPaidAndLocked = function(questionType) {
 		if(questionType.free == false && questionType.available == false) {
@@ -54,6 +46,7 @@ controller.controller('BeginCtrl', function(
 		} else {
 			// Here is gonna be the inappbilling code
 			alert("nao comprou");
+			db.purchase(questionType.id, $state);
 		}
 	}
 });
