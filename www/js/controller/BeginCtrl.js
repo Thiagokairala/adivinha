@@ -2,11 +2,16 @@ controller.controller('BeginCtrl', function(
 	$scope, 
 	$state, 
 	$ionicPlatform, 
-	json) {
+	json,
+	db) {
 
-	json.all('questionTypes.json').success(function(types){
-		$scope.questionTypes = types;
+	$ionicPlatform.ready(function() {
+		$scope.questionTypes = db.get($scope.questionTypes);
 	});
+
+	// json.all('questionTypes.json').success(function(types){
+	// 	$scope.questionTypes = types;
+	// });
 
 	$scope.isPaidAndLocked = function(questionType) {
 		if(questionType.free == false && questionType.available == false) {

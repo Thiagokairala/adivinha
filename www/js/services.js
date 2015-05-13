@@ -9,6 +9,22 @@ var services = angular.module('adivinha.services', [])
 	}
 })
 
+.factory('db', function($cordovaSQLite) {
+    return {
+        get: function() {
+            var db = window.sqlitePlugin.openDatabase({name: "adivinha.db", createFromLocation: 1, createFromResource: 1});
+            query = "SELECT * FROM 'questionType'";
+            db.transaction(function(tx) {
+                tx.executeSql(query, [], function(tx, res){
+                   return res.rows;
+                });
+            }, function(e) {
+                alert(e.message);
+            });
+        }
+    }
+})
+
 .factory('Shuffler', function() {
     return {
         shuffle: function(array) {
