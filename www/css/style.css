@@ -5,6 +5,16 @@ html, body {
 	border: 0;
 }
 
+@font-face {
+  font-family: myHelveticaLight;
+  src: local("Helvetica Neue"),
+       local("HelveticaNeue");
+}
+
+h1, h2, h3, h4, h5, h6, span, p {
+	font-family: myHelvetica
+}
+
 .questionType {
 	position: relative;
 	height: 160px;
@@ -57,6 +67,7 @@ html, body {
 .header_box {
 	position: relative;
 	padding: 0;
+	height: 53px;
 }
 
 .img_question_type {
