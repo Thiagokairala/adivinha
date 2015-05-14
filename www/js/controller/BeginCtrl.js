@@ -9,7 +9,6 @@ controller.controller('BeginCtrl', function(
 
 	$ionicPlatform.ready(function() {
 		db.get().then(gotValue, didntWork);
-		Store.init();
 
 		function gotValue(arrayOfTypes) {
 			$scope.questionTypes = arrayOfTypes;
@@ -53,11 +52,11 @@ controller.controller('BeginCtrl', function(
    			});
 			confirmPopup.then(function(res) {
 				if(res) {
-					db.purchase(questionType.id, $state);
+					Store.init(questionType.id, $state);
 				} else {
 					// nothing to do.
 				}
-			})	
+			});
 		}
 	}
 });

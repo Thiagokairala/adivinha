@@ -19,14 +19,14 @@ services.factory('db', function($cordovaSQLite, $q) {
 
             return deferred.promise;
         },
-        purchase: function(id, $state) {
+        purchase: function(id) {
             query = "UPDATE 'questionType' SET available = '1' WHERE id = ?";
 
             db.transaction(
                 function(tx) {
                     tx.executeSql(query, [id], 
                         function(tx, r) {
-                            $state.go($state.current, {}, {reload: true});
+                            // nothing to do.
                         }, 
                         function(tx, e) {
                             alert("SQLite Error: " + e.message);

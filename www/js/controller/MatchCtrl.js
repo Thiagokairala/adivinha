@@ -29,7 +29,7 @@ controller.controller('MatchCtrl', function($scope, $stateParams,
 
 
 	function onDeviceReady() {
-		var frequency = { frequency: 500 };  // Update every half second
+		var frequency = { frequency: 250 };  // Update every half second
 
 		var beginOfPath = getBeginOfPath();
    		$scope.correctAudio = new Media(beginOfPath + "audio/correct.mp3");
@@ -91,9 +91,9 @@ controller.controller('MatchCtrl', function($scope, $stateParams,
      
     var clock = 0;
 	function countDown() {
-		myTymeOut = $timeout(countDown, 500);
+		myTymeOut = $timeout(countDown, 250);
 		clock++;
-		if(clock === 2) {
+		if(clock === 5) {
 			$scope.counter--;
 			clock = 0;
 		}
@@ -110,12 +110,12 @@ controller.controller('MatchCtrl', function($scope, $stateParams,
 	function onSuccess(acceleration) {
 		var z = acceleration.z;
 		if(wasSetBack === true) {
-			if(z < -5.0) {
+			if(z < -4.0) {
 				$scope.wrongAudio.play();
 				showAndHideStatus('templates/wrong.html');
 				insertWordToResult($scope.allWords[$scope.currentWordIndex], false);
 				wasSetBack = false;
-			} else if(z > 5.0) {
+			} else if(z > 4.0) {
 				$scope.correctAudio.play();
 				showAndHideStatus('templates/correct.html');
 				insertWordToResult($scope.allWords[$scope.currentWordIndex], true);
