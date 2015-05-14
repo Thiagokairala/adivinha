@@ -72,7 +72,6 @@ var services = angular.module('adivinha.services', [])
         }
     }
 })
-
 .factory('SendArray', function(){
 
     var finalData;

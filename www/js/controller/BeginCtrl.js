@@ -4,10 +4,12 @@ controller.controller('BeginCtrl', function(
 	$ionicPlatform,
 	$ionicPopup,
 	json,
+	Store,
 	db) {
 
 	$ionicPlatform.ready(function() {
 		db.get().then(gotValue, didntWork);
+		Store.init();
 
 		function gotValue(arrayOfTypes) {
 			$scope.questionTypes = arrayOfTypes;
