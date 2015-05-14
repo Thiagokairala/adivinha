@@ -13,4 +13,4 @@ services.factory('Store', function() {
             store.refresh();
         }
     }
-})
+});
