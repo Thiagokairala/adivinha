@@ -1,6 +1,5 @@
 controller.controller('MatchCtrl', function($scope, $stateParams,
  $timeout, $state, $cordovaMedia, $ionicLoading, SendArray, json, Shuffler) {
-	screen.lockOrientation('landscape');
 	// loading audio files and starting games.
 	document.addEventListener("deviceready", onDeviceReady, false);
 
@@ -17,6 +16,11 @@ controller.controller('MatchCtrl', function($scope, $stateParams,
 	json.all(fileWithQuestions).success(function(words){
 		$scope.allWords = Shuffler.shuffle(words);
 	});
+
+	function changeOrientation() {
+		screen.lockOrientation('landscape');
+		$timeout.cancel(timeToChangeOrientation);
+	}
 	
 
 	const errorSpace = 2.0;
@@ -27,14 +31,15 @@ controller.controller('MatchCtrl', function($scope, $stateParams,
 
 	var accelerometerToBegin = null;
 
-
+	var timeToChangeOrientation;
 	function onDeviceReady() {
-		var frequency = { frequency: 250 };  // Update every half second
-
+		timeToChangeOrientation = $timeout(changeOrientation, 1000);
+		
 		var beginOfPath = getBeginOfPath();
    		$scope.correctAudio = new Media(beginOfPath + "audio/correct.mp3");
 		$scope.wrongAudio = new Media(beginOfPath + "audio/wrong.mp3");
 
+		var frequency = { frequency: 250 };  // Update every half second
 		accelerometer = navigator.accelerometer.watchAcceleration(isToBegin, onError, frequency);			
 	}
 	// fix for the android way to put audios.
