@@ -1,5 +1,14 @@
-controller.controller('MatchCtrl', function($scope, $stateParams,
- $timeout, $state, $cordovaMedia, $ionicLoading, SendArray, json, Shuffler) {
+controller.controller('MatchCtrl', 
+	function(
+		$scope,
+		$stateParams,
+		$timeout,
+		$state,
+		$cordovaMedia,
+		$ionicLoading,
+		SendArray,
+		json,
+		Shuffler) {
 	// loading audio files and starting games.
 	document.addEventListener("deviceready", onDeviceReady, false);
 
@@ -19,7 +28,7 @@ controller.controller('MatchCtrl', function($scope, $stateParams,
 
 	function changeOrientation() {
 		screen.lockOrientation('landscape');
-		$timeout.cancel(timeToChangeOrientation);
+		$timeout.cancel(timerToChangeOrientation);
 	}
 	
 
@@ -31,13 +40,15 @@ controller.controller('MatchCtrl', function($scope, $stateParams,
 
 	var accelerometerToBegin = null;
 
-	var timeToChangeOrientation;
+	var timerToChangeOrientation;
 	function onDeviceReady() {
-		timeToChangeOrientation = $timeout(changeOrientation, 1000);
+		timerToChangeOrientation = $timeout(changeOrientation, 1000);
 		
 		var beginOfPath = getBeginOfPath();
    		$scope.correctAudio = new Media(beginOfPath + "audio/correct.mp3");
 		$scope.wrongAudio = new Media(beginOfPath + "audio/wrong.mp3");
+		$scope.timeRunningOut = new Media(beginOfPath + "audio/countdown.mp3");
+		$scope.timeUp = new Media(beginOfPath + "audio/timeup.mp3");
 
 		var frequency = { frequency: 250 };  // Update every half second
 		accelerometer = navigator.accelerometer.watchAcceleration(isToBegin, onError, frequency);			
@@ -54,7 +65,6 @@ controller.controller('MatchCtrl', function($scope, $stateParams,
 	$scope.counterBegin = 3;
 	var timerBegin = null;
 	function beginGame() {
-		timerBegin = $timeout(beginGame, 1000);
 		$scope.counterBegin--;
 		if($scope.counterBegin == 0) {
 	    	isPlaying = true;
@@ -62,8 +72,9 @@ controller.controller('MatchCtrl', function($scope, $stateParams,
 	    	$scope.nextWord = $scope.allWords[0];
 	    	$timeout.cancel(timerBegin)
 	    	myTymeOut = $timeout(countDown, 1000);
+    	} else {
+			timerBegin = $timeout(beginGame, 1000);
     	}
-
 	}
 
 	function isToBegin(acceleration) {
@@ -80,7 +91,7 @@ controller.controller('MatchCtrl', function($scope, $stateParams,
 				}
 				if(x  > xToBegin - errorSpace && x < xToBegin + errorSpace) {
 					navigator.accelerometer.clearWatch(accelerometer);
-					beginGame();
+					timerBegin = $timeout(beginGame, 1000);
 				}
 			}
 		}
@@ -90,6 +101,8 @@ controller.controller('MatchCtrl', function($scope, $stateParams,
     function releaseMidias() {
     	$scope.correctAudio.release();
     	$scope.wrongAudio.release();
+    	$scope.timeRunningOut.release();
+    	$scope.timeUp.release();
     }
 
     $scope.counter = 20;
@@ -101,15 +114,24 @@ controller.controller('MatchCtrl', function($scope, $stateParams,
 		if(clock === 5) {
 			$scope.counter--;
 			clock = 0;
+			playTimeIsRunningOut();
 		}
 		if($scope.counter === 0) {
 			$timeout.cancel(myTymeOut);
 			SendArray.sendData(answeredWords);
+			$scope.timeUp.play();
 			releaseMidias();
 			$state.go('game.result');
 		}
 		navigator.accelerometer.getCurrentAcceleration(onSuccess, onError);
 	}
+
+	function playTimeIsRunningOut() {
+		if($scope.counter <= 5) {
+			$scope.timeRunningOut.play();
+		}
+	}
+
 	// using the accelerometer
 	var wasSetBack = true;
 	function onSuccess(acceleration) {
