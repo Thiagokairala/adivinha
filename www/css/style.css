@@ -175,3 +175,16 @@ h1, h2, h3, h4, h5, h6, span, p {
 .correct_template {
 	background-color: #54FF9F;
 }
+
+.close_type {
+	position: absolute;
+	left: 10px;
+	top: 10px;
+	height: 30px;
+	width: 30px;
+	z-index: 9999;
+}
+
+.close_type_icon {
+	font-size: 30px;
+}

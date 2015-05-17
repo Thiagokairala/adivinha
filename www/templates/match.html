@@ -1,6 +1,9 @@
 <ion-view title="match">
     <ion-pane padding="false" class="game_board">
     	<div class="game_board_div">
+            <a ng-click="closeType()" class="close_type">
+                <span class="ion-android-cancel close_type_icon"></span>
+            </a>
     		<div class="match_text_place">
     			<div ng-if="gameIsBeingPrepare() == true" class="before_game">
     				<h1 class="text_match match_title">O jogo vai começar, posicione o smartphone em sua testa</h1>

@@ -186,4 +186,14 @@ controller.controller('MatchCtrl',
 	$scope.gameRolling = function() {
 		return isPlaying;
 	}
+
+	$scope.closeType = function() {
+		$timeout.cancel(timerToChangeOrientation);
+		$timeout.cancel(myTymeOut);
+    	$timeout.cancel(timerBegin)
+		$timeout.cancel(timeOutStatus);
+		screen.lockOrientation('portrait');
+
+		$state.go("^.begin", [], {reload: true});
+	}
 });
