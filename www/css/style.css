@@ -187,3 +187,15 @@ h1, h2, h3, h4, h5, h6, span, p {
 .close_type_icon {
 	font-size: 30px;
 }
+
+.restore_purchase_block {
+	position: relative;
+	width: 100%;
+	height: 160px;
+	text-align: center;
+}
+
+.restore_purchase_img {
+	padding-top: 30px;
+	padding-bottom: 30px;
+}

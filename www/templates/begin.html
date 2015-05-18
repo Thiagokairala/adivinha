@@ -2,16 +2,21 @@
 	<ion-header-bar align-title="left" class="header_box">
 		<img src="img/homeImg/header.png" class="header_img" />
 	</ion-header-bar>
-    <ion-content padding="false">
-  		<div ng-repeat="questionType in questionTypes" class="questionType"
-  			style="background-color: #{{questionType.backGroundColor}}">
-  			<a ng-click="verifyIfIsAvailable(questionType)" class="questionTypeLink">
-  				<img src="img/locker/locked_locker.png" class="locker" 
-  					ng-if="isPaidAndLocked(questionType) == true"/>
-  				<img src="img/locker/open_locker.png" class="locker"
-  					ng-if="isPaindAndAvailable(questionType) == true" />
-  				<img src="{{questionType.imageUrl}}" class="img_question_type" />	
-  			</a>
+  <ion-content padding="false">
+		<div ng-repeat="questionType in questionTypes" class="questionType"
+			style="background-color: #{{questionType.backGroundColor}}">
+			<a ng-click="verifyIfIsAvailable(questionType)" class="questionTypeLink">
+				<img src="img/locker/locked_locker.png" class="locker" 
+					ng-if="isPaidAndLocked(questionType) == true"/>
+				<img src="img/locker/open_locker.png" class="locker"
+					ng-if="isPaindAndAvailable(questionType) == true" />
+				<img src="{{questionType.imageUrl}}" class="img_question_type" />	
+			</a>
 		</div>
+    <div class="restore_purchase_block">
+      <a ng-click="restorePurchases()" class="restore_purchase_link">
+        <img src="img/homeImg/restorePurchases.png" class="restore_purchase_img"/>
+      </a>
+    </div>
 	</ion-content>
 </ion-view>

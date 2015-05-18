@@ -194,6 +194,6 @@ controller.controller('MatchCtrl',
 		$timeout.cancel(timeOutStatus);
 		screen.lockOrientation('portrait');
 
-		$state.go("^.begin", [], {reload: true});
+		$state.go("^.begin",{} , {reload: true});
 	}
 });
