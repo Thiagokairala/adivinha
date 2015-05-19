@@ -1,4 +1,4 @@
-services.factory('Store', function(db) {
+services.factory('Store', function(db, $state) {
     return {
         init: function() {
             console.log("Initializing store");
@@ -62,6 +62,8 @@ services.factory('Store', function(db) {
                     alert("order approved");
                     db.purchase(product.id);
                     order.finish();
+                    alert("entrou aqui");
+                    $state.go("game.begin", {}, {reload: true});
                 }
             );
         },

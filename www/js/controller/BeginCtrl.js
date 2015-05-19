@@ -41,14 +41,6 @@ controller.controller('BeginCtrl', function(
 		}
 	}
 
-	$scope.isPaindAndAvailable = function(questionType) {
-		if(questionType.free == false && questionType.available == true) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
 	$scope.verifyIfIsAvailable = function(questionType) {
 		var free = questionType.free;
 		var paidAndAvailable = free == false && questionType.available == true;
