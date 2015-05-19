@@ -6,13 +6,14 @@ controller.controller('MatchCtrl',
 		$state,
 		$cordovaMedia,
 		$ionicLoading,
+		$cordovaSplashscreen,
 		SendArray,
 		json,
 		Shuffler) {
 	// loading audio files and starting games.
 	document.addEventListener("deviceready", onDeviceReady, false);
-
 	// preparing the board for the game
+	console.log("getting file of questions");
 	var fileWithQuestions = $stateParams.fileWithQuestions;
 	$scope.currentWordIndex = 0;
 	var answeredWords = [];
@@ -23,12 +24,13 @@ controller.controller('MatchCtrl',
 	var myTymeOut;
 
 	json.all(fileWithQuestions).success(function(words){
+		console.log("shuffling words");
 		$scope.allWords = Shuffler.shuffle(words);
 	});
 
-	function changeOrientation() {
-		screen.lockOrientation('landscape');
-		$timeout.cancel(timerToChangeOrientation);
+	function removeSplash() {
+		$cordovaSplashscreen.hide();
+		$timeout.cancel(timerToRemoveSplashScreen);
 	}
 	
 
@@ -40,16 +42,22 @@ controller.controller('MatchCtrl',
 
 	var accelerometerToBegin = null;
 
-	var timerToChangeOrientation;
+	var timerToRemoveSplashScreen;
 	function onDeviceReady() {
-		timerToChangeOrientation = $timeout(changeOrientation, 1000);
+		console.log("changing screen orientation");
+		screen.lockOrientation('landscape');
+		timerToRemoveSplashScreen = $timeout(removeSplash, 1000);
+
 		
 		var beginOfPath = getBeginOfPath();
+
+		console.log("loading audios files from " + beginOfPath);
    		$scope.correctAudio = new Media(beginOfPath + "audio/correct.mp3");
 		$scope.wrongAudio = new Media(beginOfPath + "audio/wrong.mp3");
 		$scope.timeRunningOut = new Media(beginOfPath + "audio/countdown.mp3");
 		$scope.timeUp = new Media(beginOfPath + "audio/timeup.mp3");
 
+		console.log("checking for begining");
 		var frequency = { frequency: 250 };  // Update every half second
 		accelerometer = navigator.accelerometer.watchAcceleration(isToBegin, onError, frequency);			
 	}
@@ -65,6 +73,7 @@ controller.controller('MatchCtrl',
 	$scope.counterBegin = 3;
 	var timerBegin = null;
 	function beginGame() {
+		console.log("starting timer for game");
 		$scope.counterBegin--;
 		if($scope.counterBegin == 0) {
 	    	isPlaying = true;
@@ -90,6 +99,7 @@ controller.controller('MatchCtrl',
 					x = x;
 				}
 				if(x  > xToBegin - errorSpace && x < xToBegin + errorSpace) {
+					console.log("starting game!");
 					navigator.accelerometer.clearWatch(accelerometer);
 					timerBegin = $timeout(beginGame, 1000);
 				}
@@ -99,6 +109,7 @@ controller.controller('MatchCtrl',
     
     // function to release midia memory
     function releaseMidias() {
+    	console.log("releasing midias");
     	$scope.correctAudio.release();
     	$scope.wrongAudio.release();
     	$scope.timeRunningOut.release();
@@ -121,6 +132,8 @@ controller.controller('MatchCtrl',
 			SendArray.sendData(answeredWords);
 			$scope.timeUp.play();
 			releaseMidias();
+			cancelTimers();
+			$cordovaSplashscreen.show();
 			$state.go('game.result');
 		}
 		navigator.accelerometer.getCurrentAcceleration(onSuccess, onError);
@@ -187,13 +200,23 @@ controller.controller('MatchCtrl',
 		return isPlaying;
 	}
 
-	$scope.closeType = function() {
-		$timeout.cancel(timerToChangeOrientation);
+	function cancelTimers() {
+		console.log("canceling timers");
+		$timeout.cancel(timerToRemoveSplashScreen);
 		$timeout.cancel(myTymeOut);
     	$timeout.cancel(timerBegin)
 		$timeout.cancel(timeOutStatus);
-		screen.lockOrientation('portrait');
+	}
 
-		$state.go("^.begin",{} , {reload: true});
+	$scope.closeType = function() {
+		console.log("releasing midias");
+		releaseMidias();
+		cancelTimers();
+
+		console.log("showing splash screen");
+		$cordovaSplashscreen.show();
+
+		console.log("redirecting to begin");
+		$state.go("^.begin", {}, {reload: true});
 	}
 });
