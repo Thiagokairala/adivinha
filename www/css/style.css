@@ -180,6 +180,10 @@ h1, h2, h3, h4, h5, h6, span, p {
 	background-color: #54FF9F;
 }
 
+.transition_template {
+	background-color: #A7A4CE;
+}
+
 .close_type {
 	position: absolute;
 	left: 10px;

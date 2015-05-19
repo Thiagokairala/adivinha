@@ -6,7 +6,7 @@ controller.controller('MatchCtrl',
 		$state,
 		$cordovaMedia,
 		$ionicLoading,
-		$cordovaSplashscreen,
+		returnToBegin,
 		SendArray,
 		json,
 		Shuffler) {
@@ -36,11 +36,7 @@ controller.controller('MatchCtrl',
 
 	var accelerometerToBegin = null;
 
-	function onDeviceReady() {
-		console.log("changing screen orientation");
-		screen.lockOrientation('landscape');
-
-		
+	function onDeviceReady() {		
 		var beginOfPath = getBeginOfPath();
 
 		console.log("loading audios files from " + beginOfPath);
@@ -50,7 +46,7 @@ controller.controller('MatchCtrl',
 		$scope.timeUp = new Media(beginOfPath + "audio/timeup.mp3");
 
 		console.log("checking for begining");
-		var frequency = { frequency: 250 };  // Update every half second
+		var frequency = { frequency: 400 };  // Update every half second
 		accelerometer = navigator.accelerometer.watchAcceleration(isToBegin, onError, frequency);			
 	}
 	// fix for the android way to put audios.
@@ -157,17 +153,16 @@ controller.controller('MatchCtrl',
 		}
 	}
 
-	var timeOutStatus = null;
+	var timeOutChangeWord = null;
 	function showAndHideStatus(path) {
-		$ionicLoading.show({templateUrl: path});
-		timeOutStatus = $timeout(hideStatus, 1000);
+		$ionicLoading.show({templateUrl: path, duration: 1000});
+		timeOutChangeWord = $timeout(changeWord, 800);
 	}
 
-	function hideStatus() {
-		$ionicLoading.hide();
+	function changeWord() {
 		$scope.currentWordIndex = $scope.currentWordIndex + 1;
 		$scope.nextWord = $scope.allWords[$scope.currentWordIndex];
-		$timeout.cancel(timeOutStatus);
+		$timeout.cancel(timeOutChangeWord);
 	}
 
 	function insertWordToResult(word, answer) {
@@ -195,18 +190,15 @@ controller.controller('MatchCtrl',
 		console.log("canceling timers");
 		$timeout.cancel(myTymeOut);
     	$timeout.cancel(timerBegin)
-		$timeout.cancel(timeOutStatus);
+		$timeout.cancel(timeOutChangeWord);
 	}
+
+	
 
 	$scope.closeType = function() {
 		console.log("releasing midias");
 		releaseMidias();
 		cancelTimers();
-
-		console.log("showing splash screen");
-		$cordovaSplashscreen.show();
-
-		console.log("redirecting to begin");
-		$state.go("^.begin", {}, {reload: true});
+		returnToBegin.goBack();
 	}
 });
