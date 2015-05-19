@@ -31,6 +31,7 @@ app.run(function($ionicPlatform) {
 
 app.config(function($stateProvider, $urlRouterProvider) {
   // setup an abstract state for the tabs directive
+
   $stateProvider
 
   .state('game', {
@@ -40,6 +41,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
   })
 
   .state('game.begin', {
+    cache: false,
     url: '/begin',
     views: {
       'begin': {
@@ -49,6 +51,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     }
   })
   .state('game.match', {
+    cache: false,
     url: '/match/:fileWithQuestions',
     views: {
       'match': {
@@ -58,6 +61,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     }
   })
   .state('game.result', {
+    cache: false,
     url: '/result',
     views: {
       'result': {

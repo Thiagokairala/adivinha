@@ -2,7 +2,10 @@ services.factory('Store', function(db) {
     return {
         init: function() {
             console.log("Initializing store");
+            store.verbosity = store.INFO;
+
             if(store.products.length === 0) {
+
                 store.register({
                     id:    "5",
                     alias: "Celebridades",
@@ -54,15 +57,16 @@ services.factory('Store', function(db) {
             } else {
                 console.log("itens already registered");
             }
+            store.when("product").approved(
+                function(product) {
+                    alert("order approved");
+                    db.purchase(product.id);
+                    order.finish();
+                }
+            );
         },
 
         purchase: function(id, $state) {
-            store.when("order").approved(function(order) {
-                console.log("order approved");
-                db.purchase(order.id);
-                order.finish();
-                $state.go($state.current, {}, {reload: true});
-            });
             store.ready(function() {
                 console.log("purchasing itens");
                 var product = store.get(id).id;

@@ -12,7 +12,6 @@ controller.controller('BeginCtrl', function(
 	$ionicPlatform.ready(function() {
 		db.get().then(gotValue, didntWork);
 		Store.init();
-		screen.lockOrientation('portrait');
 
 		var hideSplashScreenTimer = null;
 
@@ -25,7 +24,6 @@ controller.controller('BeginCtrl', function(
 			console.log("loading types");
 			$scope.questionTypes = arrayOfTypes;
 			hideSplashScreenTimer = $timeout(hideSplashScreen, 1000);
-
 		}
 
 		function didntWork(e) {
@@ -54,7 +52,7 @@ controller.controller('BeginCtrl', function(
 		var paidAndAvailable = free == false && questionType.available == true;
 		if(free || paidAndAvailable) {
 			console.log("types is available going to game");
-			$cordovaSplashscreen.show();
+
 			$state.go(
 				'^.match', 
 				{

@@ -28,12 +28,6 @@ controller.controller('MatchCtrl',
 		$scope.allWords = Shuffler.shuffle(words);
 	});
 
-	function removeSplash() {
-		$cordovaSplashscreen.hide();
-		$timeout.cancel(timerToRemoveSplashScreen);
-	}
-	
-
 	const errorSpace = 2.0;
 
 	const xToBegin = 9.8;
@@ -42,11 +36,9 @@ controller.controller('MatchCtrl',
 
 	var accelerometerToBegin = null;
 
-	var timerToRemoveSplashScreen;
 	function onDeviceReady() {
 		console.log("changing screen orientation");
 		screen.lockOrientation('landscape');
-		timerToRemoveSplashScreen = $timeout(removeSplash, 1000);
 
 		
 		var beginOfPath = getBeginOfPath();
@@ -133,8 +125,7 @@ controller.controller('MatchCtrl',
 			$scope.timeUp.play();
 			releaseMidias();
 			cancelTimers();
-			$cordovaSplashscreen.show();
-			$state.go('game.result');
+			$state.go('^.result');
 		}
 		navigator.accelerometer.getCurrentAcceleration(onSuccess, onError);
 	}
@@ -174,6 +165,8 @@ controller.controller('MatchCtrl',
 
 	function hideStatus() {
 		$ionicLoading.hide();
+		$scope.currentWordIndex = $scope.currentWordIndex + 1;
+		$scope.nextWord = $scope.allWords[$scope.currentWordIndex];
 		$timeout.cancel(timeOutStatus);
 	}
 
@@ -184,8 +177,6 @@ controller.controller('MatchCtrl',
 				answer:answer
 			};
 		answeredWords.push(answeredWord);
-		$scope.currentWordIndex = $scope.currentWordIndex + 1;
-		$scope.nextWord = $scope.allWords[$scope.currentWordIndex];
 	}
 
 	function onError() {
@@ -202,7 +193,6 @@ controller.controller('MatchCtrl',
 
 	function cancelTimers() {
 		console.log("canceling timers");
-		$timeout.cancel(timerToRemoveSplashScreen);
 		$timeout.cancel(myTymeOut);
     	$timeout.cancel(timerBegin)
 		$timeout.cancel(timeOutStatus);
