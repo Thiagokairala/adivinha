@@ -12,7 +12,6 @@ services.factory('AccelerometerToBegin', function($cordovaDeviceMotion) {
 			console.info("Starting to watch acceleration");
 			this.acellerometer = $cordovaDeviceMotion.watchAcceleration(options);
 			var internalAcellerometer = this.acellerometer;
-			console.log(this.acellerometer);
 			internalAcellerometer.then(null, 
 				function(error) {
 					console.error(error.message);

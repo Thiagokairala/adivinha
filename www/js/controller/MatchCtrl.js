@@ -24,6 +24,9 @@ controller.controller('MatchCtrl',
 			wordsUsed: []
 		}
 
+		/***********************************************
+		 * Instantiating game
+		 **********************************************/
 		$ionicPlatform.ready(function() {
 			fileName = $stateParams.fileWithQuestions;
 			console.info("file with questions: " + fileName);
@@ -35,18 +38,20 @@ controller.controller('MatchCtrl',
 			AccelerometerToBegin.whenToStart(startCountDownToGame);
 		});
 
-		/***********************************************
-		 * Section that controls the begin of the game.
-		 ***********************************************/
-		var countDownToGame = null;
 		function startCountDownToGame() {
 			console.info("Starting countdown to game");
-			CountDownToGame.startCountDownToGame($scope, function() {});
-			
+			CountDownToGame.startCountDownToGame($scope, startGameItSelf);
 		}
 
+		function startGameItSelf() {
+			console.info("Game Started");
+		}
+
+		/************************************************
+		 * This part is used when the user quits the game
+		 ************************************************/
 		function stopCountDowns() {
-			$timeout.cancel(countDownToGame);
+			CountDownToGame.cancelTimeOut();
 		}
 
 		$scope.closeType = function() {
