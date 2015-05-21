@@ -14,13 +14,14 @@ services.factory('CountDownGame', function($timeout) {
 			var self = this;
 			if(match.counterGame === 0) {
 				$timeout.cancel(this.timeout);
+				runWhenFinished();
 			} else {
 				this.timeout = $timeout(function() {
 					self.startCountDownGame(match, runWhenFinished);
 				}, 1000);
 			}
 		},
-		
+
 		cancelTimeOut: function() {
 			console.info("canceling timeout of game");
 			$timeout.cancel(this.timeout);

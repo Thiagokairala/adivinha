@@ -13,7 +13,8 @@ controller.controller('MatchCtrl',
 		medias,
 		AccelerometerToBegin,
 		CountDownToGame,
-		CountDownGame) {
+		CountDownGame,
+		AccelerometerForGame) {
 
 		$scope.match = {
 			gameRolling: false,
@@ -51,7 +52,13 @@ controller.controller('MatchCtrl',
 			console.info("Game Started");
 			$scope.match.gameRolling = true;
 			$scope.match.currentWord = $scope.match.words[0];
-			CountDownGame.countDownGame($scope.match, function() {});
+			medias.init();
+			CountDownGame.countDownGame($scope.match, finishGame);
+			AccelerometerForGame.startGameAccelerometer(medias, $scope.match);
+		}
+
+		function finishGame() {
+			console.info("game finishing going to result");
 		}
 
 		/************************************************
@@ -67,6 +74,7 @@ controller.controller('MatchCtrl',
 			medias.destroy();
 			stopCountDowns();
 			AccelerometerToBegin.clearWatch();
+			AccelerometerForGame.clearWatch();
 			returnToBegin.goBack();
 		};
 });

@@ -9,7 +9,7 @@ services.factory('AccelerometerToBegin', function($cordovaDeviceMotion) {
 			const zToBegin = 0;
 			
 			var options = {frequency: 500};
-			console.info("Starting to watch acceleration");
+			console.info("Starting to watch acceleration for begining");
 			this.acellerometer = $cordovaDeviceMotion.watchAcceleration(options);
 			var internalAcellerometer = this.acellerometer;
 			internalAcellerometer.then(null, 

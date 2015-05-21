@@ -8,7 +8,7 @@ services.factory('medias', function($cordovaMedia){
 
 		init: function() {
 			console.info("Loading Medias");
-			var beginOfPath = "audio";
+			var beginOfPath = "audio/";
 			
 			if(device.platform.toLowerCase() == "android") {
 				beginOfPath = "/android_asset/www/" + beginOfPath;
