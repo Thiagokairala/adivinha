@@ -19,7 +19,7 @@ controller.controller('MatchCtrl',
 		$scope.match = {
 			gameRolling: false,
 			counterBegin: 3,
-			counterGame: 10,
+			counterGame: 60,
 			currentWord: null,
 			currentWordIndex: 0,
 			words: [],
@@ -59,6 +59,11 @@ controller.controller('MatchCtrl',
 
 		function finishGame() {
 			console.info("game finishing going to result");
+			AccelerometerForGame.clearWatch();
+			console.info("sending data to result");
+			SendArray.sendData($scope.match.wordsUsed);
+			console.info("goingo to result");
+			$state.go("^.result");
 		}
 
 		/************************************************
@@ -67,7 +72,6 @@ controller.controller('MatchCtrl',
 		function stopCountDowns() {
 			CountDownToGame.cancelTimeOut();
 			CountDownGame.cancelTimeOut();
-
 		}
 
 		$scope.closeType = function() {
