@@ -12,12 +12,13 @@ controller.controller('MatchCtrl',
 		Shuffler,
 		medias,
 		AccelerometerToBegin,
-		CountDownToGame) {
+		CountDownToGame,
+		CountDownGame) {
 
 		$scope.match = {
 			gameRolling: false,
 			counterBegin: 3,
-			counterGame: 60,
+			counterGame: 10,
 			currentWord: null,
 			currentWordIndex: 0,
 			words: [],
@@ -38,6 +39,9 @@ controller.controller('MatchCtrl',
 			AccelerometerToBegin.whenToStart(startCountDownToGame);
 		});
 
+		/************************************************
+		 * Game functions
+		 ************************************************/
 		function startCountDownToGame() {
 			console.info("Starting countdown to game");
 			CountDownToGame.startCountDownToGame($scope, startGameItSelf);
@@ -45,6 +49,9 @@ controller.controller('MatchCtrl',
 
 		function startGameItSelf() {
 			console.info("Game Started");
+			$scope.match.gameRolling = true;
+			$scope.match.currentWord = $scope.match.words[0];
+			CountDownGame.countDownGame($scope.match, function() {});
 		}
 
 		/************************************************
@@ -52,6 +59,8 @@ controller.controller('MatchCtrl',
 		 ************************************************/
 		function stopCountDowns() {
 			CountDownToGame.cancelTimeOut();
+			CountDownGame.cancelTimeOut();
+
 		}
 
 		$scope.closeType = function() {
