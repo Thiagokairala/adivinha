@@ -3,7 +3,6 @@ controller.controller('BeginCtrl', function(
 	$state, 
 	$ionicPlatform,
 	$ionicPopup,
-	$cordovaSplashscreen,
 	$timeout,
 	$ionicLoading,
 	json,
@@ -17,7 +16,6 @@ controller.controller('BeginCtrl', function(
 		var hideSplashScreenTimer = null;
 
 		function hideSplashScreen() {
-			$cordovaSplashscreen.hide();
 			$ionicLoading.hide();
 			$timeout.cancel(hideSplashScreenTimer);
 		}

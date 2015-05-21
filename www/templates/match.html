@@ -5,13 +5,13 @@
                 <span class="ion-android-cancel close_type_icon"></span>
             </a>
     		<div class="match_text_place">
-    			<div ng-if="gameIsBeingPrepare() == true" class="before_game">
+    			<div ng-show="match.gameRolling === false" class="before_game">
     				<h1 class="text_match match_title">Posicione o celular em sua testa</h1>
-    				<h3 class="text_match match_sub_title">{{counterBegin}}</h3>
+    				<h3 class="text_match match_sub_title">{{match.counterBegin}}</h3>
     			</div>
-    			<div ng-if="gameRolling() === true" class="during_game">
-	    			<h1 class="text_match match_title">{{nextWord.word}}</h1>
-		    		<h3 class="text_match match_sub_title">{{counter}}</h3>
+    			<div ng-show="match.gameRolling === true" class="during_game">
+	    			<h1 class="text_match match_title">{{match.currentWord}}</h1>
+		    		<h3 class="text_match match_sub_title">{{match.counterGame}}</h3>
 	    		</div>
     		</div>
 		</div>
