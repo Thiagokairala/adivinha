@@ -18,8 +18,8 @@ controller.controller('BeginCtrl', function(
 
 		function hideSplashScreen() {
 			$cordovaSplashscreen.hide();
-			$timeout.cancel(hideSplashScreenTimer);
 			$ionicLoading.hide();
+			$timeout.cancel(hideSplashScreenTimer);
 		}
 
 		function gotValue(arrayOfTypes) {

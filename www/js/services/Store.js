@@ -1,4 +1,4 @@
-services.factory('Store', function(db, $state) {
+services.factory('Store', function(db, $state, returnToBegin) {
     return {
         init: function() {
             console.log("Initializing store");
@@ -57,13 +57,13 @@ services.factory('Store', function(db, $state) {
             } else {
                 console.log("itens already registered");
             }
+            
             store.when("product").approved(
                 function(product) {
-                    alert("order approved");
+                    console.log("order approved");
                     db.purchase(product.id);
-                    order.finish();
-                    alert("entrou aqui");
-                    $state.go("game.begin", {}, {reload: true});
+                    product.finish();
+                    returnToBegin.goBack();
                 }
             );
         },
@@ -92,7 +92,7 @@ services.factory('Store', function(db, $state) {
                         db.purchase(id);
                     }
                 }
-                $state.go($state.current, {}, {reload:true});
+                returnToBegin.goBack();
             });
         }
     }

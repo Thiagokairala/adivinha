@@ -14,7 +14,7 @@ services.factory('db', function($cordovaSQLite, $q) {
                 });
             }, function(e) {
                 deferred.reject(e);
-                alert(e.message);
+                console.log(e.message);
             });
 
             return deferred.promise;
@@ -29,7 +29,7 @@ services.factory('db', function($cordovaSQLite, $q) {
                             // nothing to do.
                         }, 
                         function(tx, e) {
-                            alert("SQLite Error: " + e.message);
+                            console.log("SQLite Error: " + e.message);
                         }
                     );
                 }
