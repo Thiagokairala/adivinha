@@ -2,7 +2,6 @@ controller.controller('MatchCtrl',
 	function(
 		$scope,
 		$stateParams,
-		$timeout,
 		$state,
 		$ionicLoading,
 		$ionicPlatform,
@@ -19,7 +18,7 @@ controller.controller('MatchCtrl',
 		$scope.match = {
 			gameRolling: false,
 			counterBegin: 3,
-			counterGame: 60,
+			counterGame: 8,
 			currentWord: null,
 			currentWordIndex: 0,
 			words: [],
@@ -54,7 +53,7 @@ controller.controller('MatchCtrl',
 			$scope.match.currentWord = $scope.match.words[0];
 			medias.init();
 			CountDownGame.countDownGame($scope.match, finishGame);
-			AccelerometerForGame.startGameAccelerometer(medias, $scope.match);
+			AccelerometerForGame.startGameAccelerometer($scope.match);
 		}
 
 		function finishGame() {

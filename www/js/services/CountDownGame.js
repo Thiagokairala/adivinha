@@ -1,4 +1,4 @@
-services.factory('CountDownGame', function($timeout) {
+services.factory('CountDownGame', function($timeout, medias) {
 	return {
 		timeout: null,
 		countDownGame: function(match, runWhenFinished) {
@@ -13,9 +13,13 @@ services.factory('CountDownGame', function($timeout) {
 			match.counterGame--;
 			var self = this;
 			if(match.counterGame === 0) {
+				medias.timeOut();
 				$timeout.cancel(this.timeout);
 				runWhenFinished();
 			} else {
+				if(match.counterGame <= 5) {
+					medias.timeRunningOut();
+				}
 				this.timeout = $timeout(function() {
 					self.startCountDownGame(match, runWhenFinished);
 				}, 1000);

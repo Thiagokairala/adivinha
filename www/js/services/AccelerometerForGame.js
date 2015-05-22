@@ -1,8 +1,13 @@
-services.factory('AccelerometerForGame', function($cordovaDeviceMotion, $ionicLoading, $timeout) {
+services.factory('AccelerometerForGame', 
+	function(
+		$cordovaDeviceMotion,
+		$ionicLoading,
+		$timeout,
+		medias) {
 	return {
 		accelerometer: null,
 		wasSetBack: true,
-		startGameAccelerometer: function(medias, match) {
+		startGameAccelerometer: function(match) {
 			var options = {frequency: 250};
 			console.info("Starting to watch acceleration of game");
 			this.accelerometer = $cordovaDeviceMotion.watchAcceleration(options);

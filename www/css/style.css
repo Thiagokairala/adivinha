@@ -17,8 +17,8 @@ h1, h2, h3, h4, h5, h6, span, p {
 
 .questionType {
 	position: relative;
-	height: 120px;
-	width: 25%;
+	height: 140px;
+	width: 33.333%;
 	float: left;
 	padding: 0;
 	margin: 0;
