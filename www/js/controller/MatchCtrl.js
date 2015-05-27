@@ -35,7 +35,7 @@ controller.controller('MatchCtrl',
 			json.all(fileName).success(function(words) {
 				console.info("Shuffling words");
 				$scope.match.words = Shuffler.shuffle(words);
-			})
+			});
 			AccelerometerToBegin.whenToStart(startCountDownToGame);
 		});
 

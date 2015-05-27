@@ -5,6 +5,7 @@ controller.controller('BeginCtrl', function(
 	$ionicPopup,
 	$timeout,
 	$ionicLoading,
+	$cordovaDeviceMotion,
 	json,
 	Store,
 	db) {
