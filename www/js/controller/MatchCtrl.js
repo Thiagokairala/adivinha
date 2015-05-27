@@ -18,7 +18,7 @@ controller.controller('MatchCtrl',
 		$scope.match = {
 			gameRolling: false,
 			counterBegin: 3,
-			counterGame: 8,
+			counterGame: 60,
 			currentWord: null,
 			currentWordIndex: 0,
 			words: [],

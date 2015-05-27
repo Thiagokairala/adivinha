@@ -46,7 +46,6 @@ services.factory('AccelerometerToBegin', function($cordovaDeviceMotion, $timeout
 			timeOut = $timeout(checkAcceleration, 250);
 		} else {
 			$timeout.cancel(timeOut);
-			console.log();
 		}
 	}
 
