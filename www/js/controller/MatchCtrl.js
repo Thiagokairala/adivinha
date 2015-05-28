@@ -18,7 +18,7 @@ controller.controller('MatchCtrl',
 		$scope.match = {
 			gameRolling: false,
 			counterBegin: 3,
-			counterGame: 8,
+			counterGame: 60,
 			currentWord: null,
 			currentWordIndex: 0,
 			words: [],
@@ -36,6 +36,8 @@ controller.controller('MatchCtrl',
 				console.info("Shuffling words");
 				$scope.match.words = Shuffler.shuffle(words);
 			})
+			console.info("preventing screen from sleep");
+			window.plugins.insomnia.keepAwake()
 			AccelerometerToBegin.whenToStart(startCountDownToGame);
 		});
 
@@ -61,6 +63,8 @@ controller.controller('MatchCtrl',
 			AccelerometerForGame.clearWatch();
 			console.info("sending data to result");
 			SendArray.sendData($scope.match.wordsUsed);
+			console.info("allowing screen to sleep")
+			window.plugins.insomnia.allowSleepAgain();
 			console.info("goingo to result");
 			$state.go("^.result");
 		}
@@ -76,6 +80,8 @@ controller.controller('MatchCtrl',
 		$scope.closeType = function() {
 			medias.destroy();
 			stopCountDowns();
+			console.info("allowing screen to sleep")
+			window.plugins.insomnia.allowSleepAgain();
 			AccelerometerToBegin.clearWatch();
 			AccelerometerForGame.clearWatch();
 			returnToBegin.goBack();

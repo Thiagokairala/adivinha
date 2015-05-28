@@ -117,7 +117,6 @@ h1, h2, h3, h4, h5, h6, span, p {
 
 .answers {
 	padding-top: 4%;
-	position: relative;
 	float: left;
 	border: 5px solid white;
 	-webkit-border-radius: 5px;
@@ -141,7 +140,6 @@ h1, h2, h3, h4, h5, h6, span, p {
 }
 
 .back_div {
-	position: relative;
 	float: right;
 	width: 50%;
 	padding-top: 12.5%;
@@ -153,6 +151,7 @@ h1, h2, h3, h4, h5, h6, span, p {
 	width: 100%;
 }
 .back_btn {
+	max-height: 80px;
 	position: relative;
 	width: 80%;
 	height: 100%;
